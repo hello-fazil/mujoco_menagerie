@@ -33,17 +33,29 @@
           <position ctrlrange="-1.53 0.79"/>
         </default>
       </default>
+
       <default class="wrist">
-        <joint axis="0 0 -1" range="-1.75 4" damping=".1"/>
-        <general gainprm="1" biasprm="0 -1 0" ctrlrange="-1.75 4" forcerange="-5 5"/>
-      </default>
-      <default class="finger_open">
-        <joint axis="0 0 1" range="-0.6 0.6" damping=".1"/>
-      </default>
-      <default class="finger_slide">
-        <joint type="slide" axis="1 0 0" range="-0.005 .04" damping=".1"/>
-        <general gainprm="2000" biasprm="0 -2000 -200" ctrlrange="-0.005 .04"/>
-      </default>
+        <default class="wrist_yaw">
+          <joint axis="0 0 -1" range="-1.75 4"/>
+          <general ctrlrange="-1.75 4"/>
+        </default>
+        <default class="wrist_pitch">
+          <joint axis="0 0 -1" range="-1.57 0.56"/>
+          <general ctrlrange="-1.57 0.56"/>
+        </default>
+        <default class="wrist_roll">
+          <joint axis="0 0 1" range="-3.14 3.14"/>
+          <general ctrlrange="-3.14 3.14"/>
+        </default>
+        <default class="finger_open">
+          <joint axis="0 0 1" range="-0.6 0.6" damping=".1"/>
+        </default>
+        <default class="finger_slide">
+          <joint type="slide" axis="1 0 0" range="-0.005 .04" damping=".1"/>
+          <general gainprm="1" biasprm="0 -2000 -200" ctrlrange="-0.005 .04"/>
+        </default>
+    </default>
+
       <default class="visual">
         <geom group="2" type="mesh" contype="0" conaffinity="0"/>
       </default>
@@ -302,10 +314,19 @@
                       mass="3.6E-06" shellinertia="true"/>
                     <geom mesh="link_aruco_inner_wrist" class="collision"/>
                   </body>
-                  <body name="link_wrist_yaw" pos="0.083 -0.03075 0" quat="1 1 0 0" gravcomp="1">
-                    <joint name="joint_wrist_yaw" class="wrist"/>
+                  <body name="link_wrist_yaw" pos="0.083 -0.03075 0" quat="-1 -1 0 0" gravcomp="1">
+                    <joint name="joint_wrist_yaw" class="wrist_yaw"/>
                     <geom material="Generic_Black" mesh="link_wrist_yaw" mass="0.1445" class="visual"/>
                     <geom mesh="link_wrist_yaw" class="collision"/>
+                    <geom quat="0 1 1 0" pos="0 0 0" mesh="link_DW3_wrist_yaw_bottom" material="Generic_Black" class="visual"/>
+                      <body name="link_DW3_wrist_pitch" pos="-0.000711479645697954 -0.0147442681465562 0.0195140764319514" quat="1 0 1 0">
+                        <joint name="joint_wrist_pitch" class="wrist_pitch"/>
+                        <geom material="Generic_Black" mesh="link_DW3_wrist_pitch" mass="0.1445" class="visual"/>
+                        <geom mesh="link_DW3_wrist_pitch" class="collision"/>
+                      </body>
+
+
+
                     <!-- <geom quat="0 1 -1 0" mesh="link_gripper_0" material="Generic_Black" class="visual"/>
                     <geom quat="0 1 -1 0" mesh="link_gripper_1" material="3D_Print_Black" class="visual" mass="0.142377"/>
                     <geom quat="0 1 -1 0" mesh="link_gripper_0" class="collision"/>
@@ -395,6 +416,7 @@
     <exclude body1="link_arm_l1" body2="link_arm_l3"/>
     <exclude body1="link_arm_l1" body2="link_lift"/>
     <exclude body1="link_arm_l2" body2="link_lift"/>
+    <exclude body1="link_wrist_yaw" body2="link_DW3_wrist_pitch"/>
     <!-- <exclude body1="link_gripper_finger_left" body2="link_wrist_yaw"/>
     <exclude body1="link_gripper_finger_right" body2="link_wrist_yaw"/> -->
   </contact>
@@ -429,7 +451,8 @@
     <motor name="turn" tendon="turn" class="wheel"/>
     <general name="lift" joint="joint_lift" class="lift"/>
     <general name="arm_extend" tendon="extend" class="telescope"/>
-    <general name="wrist_yaw" joint="joint_wrist_yaw" class="wrist"/>
+    <general name="wrist_yaw" joint="joint_wrist_yaw" class="wrist_yaw"/>
+    <general name="wrist_pitch" joint="joint_wrist_pitch" class="wrist_pitch"/>
     <!-- <general name="grip" joint="joint_gripper_slide" class="finger_slide"/> -->
     <position name="head_pan" joint="joint_head_pan" class="head_pan"/>
     <position name="head_tilt" joint="joint_head_tilt" class="head_tilt"/>

@@ -14,8 +14,8 @@
         <motor ctrlrange="-1 1" gear="3" forcerange="-100 100"/>
       </default>
       <default class="lift">
-        <joint type="slide" axis="0 0 1" damping="5" range="-0.5 .6"/>
-        <general ctrlrange="-0.5 .6" gainprm="300" biasprm="0 -300 -50" forcerange="-56 56"/>
+        <joint type="slide" axis="0 0 1" damping="5" range="0.0 1.1"/>
+        <general ctrlrange="0.0 1.1" gainprm="300" biasprm="0 -300 -50" forcerange="-56 56"/>
       </default>
       <default class="telescope">
         <joint type="slide" axis="0 0 1" damping="5" range="0 0.13"/>
@@ -25,8 +25,8 @@
         <joint axis="0 0 1" damping="1"/>
         <position kp="10"/>
         <default class="head_pan">
-          <joint range="-3.9 1.5"/>
-          <position ctrlrange="-3.9 1.5"/>
+          <joint range="-4.04 1.73"/>
+          <position ctrlrange="-4.04 1.73"/>
         </default>
         <default class="head_tilt">
           <joint range="-1.53 0.79"/>
@@ -254,7 +254,7 @@
         <geom mesh="link_left_wheel_1" material="Generic_Black" class="visual"/>
         <geom class="collision" type="cylinder" size=".05 .0125" pos="0 0 -0.0125"/>
       </body>
-      <body name="link_lift" gravcomp="1" pos="-0.104385 0.134999 0.695" quat="1 0 0 1">
+      <body name="link_lift" gravcomp="1" pos="-0.104385 0.134999 0.2" quat="1 0 0 1">
         <joint name="joint_lift" class="lift"/>
         <geom mesh="link_lift_0" material="Pantone_705_U" class="visual"/>
         <geom mesh="link_lift_2" material="Pure_Black" class="visual"/>

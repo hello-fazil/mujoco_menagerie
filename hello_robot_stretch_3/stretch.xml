@@ -40,7 +40,7 @@
           <general ctrlrange="-1.75 4"/>
         </default>
         <default class="wrist_pitch">
-          <joint axis="0 0 -1" range="-1.57 0.56"/>
+          <joint axis="0 0 1" range="-1.57 0.56"/>
           <general ctrlrange="-1.57 0.56"/>
         </default>
         <default class="wrist_roll">
@@ -176,13 +176,12 @@
     <mesh file="link_gripper_finger_right_1.obj" scale="0.9 1 1"/>
     <mesh file="link_gripper_0.obj"/>
     <mesh file="link_gripper_1.obj"/>
-    <!-- <mesh file="link_wrist_yaw.obj"/> -->
+    <mesh file="link_wrist_yaw.obj"/>
 
-    <mesh file="link_wrist_yaw.stl"/>
+    <!-- <mesh file="link_wrist_yaw.stl"/> -->
     <mesh file="link_DW3_tablet_12in.stl"/>
     <mesh file="link_DW3_wrist_pitch.stl"/>
     <mesh file="link_DW3_wrist_quick_connect.stl"/>
-    <mesh file="link_DW3_wrist_roll.stl"/>
     <mesh file="link_DW3_wrist_yaw_bottom.stl"/>
     <mesh file="link_SE3_head_nav_cam.stl"/>
     <mesh file="link_SG3_aruco_d405.stl"/>
@@ -319,11 +318,20 @@
                     <geom material="Generic_Black" mesh="link_wrist_yaw" mass="0.1445" class="visual"/>
                     <geom mesh="link_wrist_yaw" class="collision"/>
                     <geom quat="0 1 1 0" pos="0 0 0" mesh="link_DW3_wrist_yaw_bottom" material="Generic_Black" class="visual"/>
-                      <body name="link_DW3_wrist_pitch" pos="-0.000711479645697954 -0.0147442681465562 0.0195140764319514" quat="1 0 1 0">
+                    <geom mesh="link_DW3_wrist_yaw_bottom" class="collision"/>
+                      <body name="link_DW3_wrist_pitch" pos="-0.01946 0 0.0305" quat="1 0 1 0">
                         <joint name="joint_wrist_pitch" class="wrist_pitch"/>
-                        <geom material="Generic_Black" mesh="link_DW3_wrist_pitch" mass="0.1445" class="visual"/>
+                        <geom material="Generic_Black" mesh="link_DW3_wrist_pitch" mass="0.1165" class="visual"/>
                         <geom mesh="link_DW3_wrist_pitch" class="collision"/>
+                        <geom pos="-0.028 -0.024 0.0196" quat="1 0 0 1" mesh="link_DW3_wrist_quick_connect" material="Generic_Black" class="visual"/>
+                        <geom mesh="link_DW3_wrist_quick_connect" class="collision"/>
+                        <body name="link_SG3_gripper_body" pos="-0.0399 -0.024 0.0196" quat="1 0 -1 0">
+                          <joint name="joint_wrist_roll" class="wrist_roll"/>
+                          <geom material="Generic_Black" mesh="link_SG3_gripper_body" mass="0.1165" class="visual"/>
+                          <geom mesh="link_SG3_gripper_body" class="collision"/>
+                        </body>
                       </body>
+                      
 
 
 
@@ -416,7 +424,7 @@
     <exclude body1="link_arm_l1" body2="link_arm_l3"/>
     <exclude body1="link_arm_l1" body2="link_lift"/>
     <exclude body1="link_arm_l2" body2="link_lift"/>
-    <exclude body1="link_wrist_yaw" body2="link_DW3_wrist_pitch"/>
+    <!-- <exclude body1="link_wrist_yaw" body2="link_DW3_wrist_pitch"/> -->
     <!-- <exclude body1="link_gripper_finger_left" body2="link_wrist_yaw"/>
     <exclude body1="link_gripper_finger_right" body2="link_wrist_yaw"/> -->
   </contact>
@@ -453,6 +461,7 @@
     <general name="arm_extend" tendon="extend" class="telescope"/>
     <general name="wrist_yaw" joint="joint_wrist_yaw" class="wrist_yaw"/>
     <general name="wrist_pitch" joint="joint_wrist_pitch" class="wrist_pitch"/>
+    <general name="wrist_roll" joint="joint_wrist_roll" class="wrist_roll"/>
     <!-- <general name="grip" joint="joint_gripper_slide" class="finger_slide"/> -->
     <position name="head_pan" joint="joint_head_pan" class="head_pan"/>
     <position name="head_tilt" joint="joint_head_tilt" class="head_tilt"/>

@@ -331,7 +331,7 @@
                         <geom mesh="link_DW3_wrist_quick_connect" class="collision"/>
                         <body name="link_SG3_gripper_body" pos="-0.0399 -0.024 0.0196" quat="1 0 -1 0">
                           <joint name="joint_wrist_roll" class="wrist_roll"/>
-                          <geom material="Generic_Black" mesh="link_SG3_gripper_body" mass="0.1165" class="visual"/>
+                          <geom material="Generic_Black" mesh="link_SG3_gripper_body" mass="0.29" class="visual"/>
                           <geom mesh="link_SG3_gripper_body" class="collision"/>
                         </body>
                       </body>
@@ -469,7 +469,7 @@
     <motor name="forward" tendon="forward" class="wheel"/>
     <motor name="turn" tendon="turn" class="wheel"/>
     <general name="lift" joint="joint_lift" class="lift"/>
-    <general name="arm_extend" tendon="extend" class="telescope"/>
+    <general name="arm" tendon="extend" class="telescope"/>
     <general name="wrist_yaw" joint="joint_wrist_yaw" class="wrist_yaw"/>
     <general name="wrist_pitch" joint="joint_wrist_pitch" class="wrist_pitch"/>
     <general name="wrist_roll" joint="joint_wrist_roll" class="wrist_roll"/>

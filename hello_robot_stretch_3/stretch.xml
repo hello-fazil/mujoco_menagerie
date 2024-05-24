@@ -35,17 +35,19 @@
       </default>
 
       <default class="wrist">
+        <joint axis="0 0 1" damping="1"/>
+        <position kp="10"/>
         <default class="wrist_yaw">
-          <joint axis="0 0 -1" range="-1.75 4"/>
-          <general ctrlrange="-1.75 4"/>
+          <joint axis="0 0 1" range="-1.75 4"/>
+          <position ctrlrange="-1.75 4"/>
         </default>
         <default class="wrist_pitch">
           <joint axis="0 0 1" range="-1.57 0.56"/>
-          <general ctrlrange="-1.57 0.56"/>
+          <position ctrlrange="-1.57 0.56"/>
         </default>
         <default class="wrist_roll">
           <joint axis="0 0 1" range="-3.14 3.14"/>
-          <general ctrlrange="-3.14 3.14"/>
+          <position ctrlrange="-3.14 3.14"/>
         </default>
         <default class="finger_open">
           <joint axis="0 0 1" range="-0.6 0.6" damping=".1"/>
@@ -313,6 +315,8 @@
                       mass="3.6E-06" shellinertia="true"/>
                     <geom mesh="link_aruco_inner_wrist" class="collision"/>
                   </body>
+
+                  <!-- Dex Wrist 3 Tree -->
                   <body name="link_wrist_yaw" pos="0.083 -0.03075 0" quat="-1 -1 0 0" gravcomp="1">
                     <joint name="joint_wrist_yaw" class="wrist_yaw"/>
                     <geom material="Generic_Black" mesh="link_wrist_yaw" mass="0.1445" class="visual"/>

@@ -333,52 +333,50 @@
                           <joint name="joint_wrist_roll" class="wrist_roll"/>
                           <geom material="Generic_Black" mesh="link_SG3_gripper_body" mass="0.29" class="visual"/>
                           <geom mesh="link_SG3_gripper_body" class="collision"/>
+
+
+                          <!-- Gripper Mechanism -->
+                            <body name="link_gripper_slider" euler="1.57 0 1.57" pos="0 0 0" gravcomp="1">
+                              <joint name="joint_gripper_slide" class="finger_slide"/>
+                              <geom type="box" size=".03 .005 .005" mass=".05" class="visual" rgba="0 0 0 0"/>
+                              <body name="link_gripper_finger_left" pos="0 0.0101513 0" gravcomp="1">
+                                <joint name="joint_gripper_finger_left_open" class="finger_open"/>
+                                <geom mesh="link_gripper_finger_left_0" material="Reflective_Metal" class="visual"
+                                  mass="0.0378216"/>
+                                <geom mesh="link_gripper_finger_left_1" material="White_Plastic" class="visual"/>
+                                <geom class="collision" size="0.00426947 0.00524467 0.08" pos="0.1 0.005 0"
+                                  quat="0.474728 0.474728 0.524055 0.524055" type="box"/>
+                                <geom mesh="link_gripper_finger_left_1" class="collision"/>
+                                <body name="rubber_tip_left" pos="0.171099 0.014912 0" quat="1 1 0 0">
+                                  <joint name="rubber_left_x" type="hinge" axis="1 0 0" damping="0.001" stiffness="0.05"/>
+                                  <joint name="rubber_left_y" type="hinge" axis="0 1 0" damping="0.001" stiffness="0.05"/>
+                                  <geom class="visual" mesh="link_gripper_fingertip_left" mass="0.005" material="suction_rubber"/>
+                                  <geom class="rubber" type="cylinder" size=".02 .005" pos="0 0 .012"/>
+                                </body>
+                              </body>
+                              <body name="link_gripper_finger_right" pos="0 -0.0100487 0" quat="0 0 -1 0" gravcomp="1">
+                                <joint name="joint_gripper_finger_right_open" class="finger_open"/>
+                                <geom mesh="link_gripper_finger_right_0" material="Reflective_Metal" class="visual"
+                                  mass="0.0378216"/>
+                                <geom mesh="link_gripper_finger_right_1" material="White_Plastic" class="visual"/>
+                                <geom class="collision" size="0.00426947 0.00524467 0.08" pos="-0.1 -0.005 0"
+                                  quat="0.474728 0.474728 0.524055 0.524055" type="box"/>
+                                <geom mesh="link_gripper_finger_right_1" class="collision"/>
+                                <body name="rubber_tip_right" pos="-0.171099 -0.014912 0" quat="1 -1 0 0">
+                                  <joint name="rubber_right_x" type="hinge" axis="1 0 0" damping="0.001" stiffness="0.05"/>
+                                  <joint name="rubber_right_y" type="hinge" axis="0 1 0" damping="0.001" stiffness="0.05"/>
+                                  <geom class="visual" material="suction_rubber" mesh="link_gripper_fingertip_right"
+                                    mass="0.005"/>
+                                  <geom class="rubber" type="cylinder" size=".02 .005" pos="0 0 .012"/>
+                                </body>
+                              </body>
+                            </body>
+
+
                         </body>
                       </body>
                       
-
-
-
-                    <!-- <geom quat="0 1 -1 0" mesh="link_gripper_0" material="Generic_Black" class="visual"/>
-                    <geom quat="0 1 -1 0" mesh="link_gripper_1" material="3D_Print_Black" class="visual" mass="0.142377"/>
-                    <geom quat="0 1 -1 0" mesh="link_gripper_0" class="collision"/>
-                    <geom quat="0 1 -1 0" mesh="link_gripper_1" class="collision"/> -->
-                    <!-- <body name="link_gripper_slider" quat="0.183013 -0.683017 -0.683009 -0.183013"
-                      pos="0 0.047231 0.04679" gravcomp="1">
-                      <joint name="joint_gripper_slide" class="finger_slide"/>
-                      <geom type="box" size=".03 .005 .005" mass=".05" class="visual" rgba="0 0 0 0"/>
-                      <body name="link_gripper_finger_left" pos="0 0.0101513 0" gravcomp="1">
-                        <joint name="joint_gripper_finger_left_open" class="finger_open"/>
-                        <geom mesh="link_gripper_finger_left_0" material="Reflective_Metal" class="visual"
-                          mass="0.0378216"/>
-                        <geom mesh="link_gripper_finger_left_1" material="White_Plastic" class="visual"/>
-                        <geom class="collision" size="0.00426947 0.00524467 0.08" pos="0.1 0.005 0"
-                          quat="0.474728 0.474728 0.524055 0.524055" type="box"/>
-                        <geom mesh="link_gripper_finger_left_1" class="collision"/>
-                        <body name="rubber_tip_left" pos="0.171099 0.014912 0" quat="1 1 0 0">
-                          <joint name="rubber_left_x" type="hinge" axis="1 0 0" damping="0.001" stiffness="0.05"/>
-                          <joint name="rubber_left_y" type="hinge" axis="0 1 0" damping="0.001" stiffness="0.05"/>
-                          <geom class="visual" mesh="link_gripper_fingertip_left" mass="0.005" material="suction_rubber"/>
-                          <geom class="rubber" type="cylinder" size=".02 .005" pos="0 0 .012"/>
-                        </body>
-                      </body>
-                      <body name="link_gripper_finger_right" pos="0 -0.0100487 0" quat="0 0 -1 0" gravcomp="1">
-                        <joint name="joint_gripper_finger_right_open" class="finger_open"/>
-                        <geom mesh="link_gripper_finger_right_0" material="Reflective_Metal" class="visual"
-                          mass="0.0378216"/>
-                        <geom mesh="link_gripper_finger_right_1" material="White_Plastic" class="visual"/>
-                        <geom class="collision" size="0.00426947 0.00524467 0.08" pos="-0.1 -0.005 0"
-                          quat="0.474728 0.474728 0.524055 0.524055" type="box"/>
-                        <geom mesh="link_gripper_finger_right_1" class="collision"/>
-                        <body name="rubber_tip_right" pos="-0.171099 -0.014912 0" quat="1 -1 0 0">
-                          <joint name="rubber_right_x" type="hinge" axis="1 0 0" damping="0.001" stiffness="0.05"/>
-                          <joint name="rubber_right_y" type="hinge" axis="0 1 0" damping="0.001" stiffness="0.05"/>
-                          <geom class="visual" material="suction_rubber" mesh="link_gripper_fingertip_right"
-                            mass="0.005"/>
-                          <geom class="rubber" type="cylinder" size=".02 .005" pos="0 0 .012"/>
-                        </body>
-                      </body>
-                    </body> -->
+                    
                   </body>
                 </body>
               </body>
@@ -443,8 +441,8 @@
     <exclude body1="link_wrist_yaw" body2="link_arm_l4"/>
     
     <!-- <exclude body1="link_wrist_yaw" body2="link_DW3_wrist_pitch"/> -->
-    <!-- <exclude body1="link_gripper_finger_left" body2="link_wrist_yaw"/>
-    <exclude body1="link_gripper_finger_right" body2="link_wrist_yaw"/> -->
+    <exclude body1="link_gripper_finger_left" body2="link_SG3_gripper_body"/>
+    <exclude body1="link_gripper_finger_right" body2="link_SG3_gripper_body"/>
   </contact>
 
   <tendon>
@@ -468,8 +466,8 @@
     <joint joint1="joint_arm_l0" joint2="joint_arm_l1"/>
     <joint joint1="joint_arm_l1" joint2="joint_arm_l2"/>
     <joint joint1="joint_arm_l2" joint2="joint_arm_l3"/>
-    <!-- <joint joint1="joint_gripper_finger_left_open" joint2="joint_gripper_slide" polycoef="0 10 0 0 0" solref="0.005 1"/>
-    <joint joint1="joint_gripper_finger_right_open" joint2="joint_gripper_slide" polycoef="0 10 0 0 0" solref="0.005 1"/> -->
+    <joint joint1="joint_gripper_finger_left_open" joint2="joint_gripper_slide" polycoef="0 10 0 0 0" solref="0.005 1"/>
+    <joint joint1="joint_gripper_finger_right_open" joint2="joint_gripper_slide" polycoef="0 10 0 0 0" solref="0.005 1"/>
   </equality>
 
   <actuator>
@@ -480,7 +478,7 @@
     <general name="wrist_yaw" joint="joint_wrist_yaw" class="wrist_yaw"/>
     <general name="wrist_pitch" joint="joint_wrist_pitch" class="wrist_pitch"/>
     <general name="wrist_roll" joint="joint_wrist_roll" class="wrist_roll"/>
-    <!-- <general name="grip" joint="joint_gripper_slide" class="finger_slide"/> -->
+    <general name="grip" joint="joint_gripper_slide" class="finger_slide"/>
     <position name="head_pan" joint="joint_head_pan" class="head_pan"/>
     <position name="head_tilt" joint="joint_head_tilt" class="head_tilt"/>
   </actuator>

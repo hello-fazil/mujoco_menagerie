@@ -54,7 +54,8 @@
         </default>
         <default class="finger_slide">
           <joint type="slide" axis="1 0 0" range="-0.005 .04" damping=".1"/>
-          <general gainprm="1" biasprm="0 -2000 -200" ctrlrange="-0.005 .04"/>
+          <!-- <general gainprm="1" biasprm="0 -2000 -200" ctrlrange="-0.005 .04"/> -->
+          <position ctrlrange="-0.005 .04" kp="100"/>
         </default>
     </default>
 
@@ -187,13 +188,19 @@
     <mesh file="link_DW3_wrist_yaw_bottom.stl"/>
     <mesh file="link_SE3_head_nav_cam.stl"/>
     <mesh file="link_SG3_aruco_d405.stl"/>
-    <mesh file="link_SG3_aruco_fingertip_left.stl"/>
-    <mesh file="link_SG3_aruco_fingertip_right.stl"/>
     <mesh file="link_SG3_gripper_body.stl"/>
-    <mesh file="link_SG3_gripper_finger_left.stl"/>
-    <mesh file="link_SG3_gripper_finger_right.stl"/>
-    <mesh file="link_SG3_gripper_fingertip_left.stl"/>
-    <mesh file="link_SG3_gripper_fingertip_right.stl"/>
+
+    <mesh file="link_SG3_gripper_left_finger.stl"/>
+    <mesh file="link_SG3_gripper_right_finger.stl"/>
+
+    <mesh file="link_SG3_gripper_left_inner_finger.stl"/>
+    <mesh file="link_SG3_gripper_right_inner_finger.stl"/>
+
+    <mesh file="link_SG3_gripper_left_finger_aruco.stl"/>
+    <mesh file="link_SG3_gripper_right_finger_aruco.stl"/>
+
+    <mesh file="link_SG3_gripper_right_fingertip.stl"/>
+    <mesh file="link_SG3_gripper_left_fingertip.stl"/>
   </asset>
 
   <worldbody>

@@ -50,12 +50,12 @@
           <position ctrlrange="-3.14 3.14"/>
         </default>
         <default class="finger_open">
-          <joint axis="0 1 0" range="-0.6 0.6" damping=".1"/>
+          <joint axis="0 -1 0" range="-0.6 0.6" damping=".1"/>
         </default>
         <default class="finger_slide">
-          <joint type="slide" axis="0 0 1" range="-0.005 .04" damping=".1"/>
+          <joint type="slide" axis="0 0 1" range="-0.04 .04" damping=".1"/>
           <!-- <general gainprm="1" biasprm="0 -2000 -200" ctrlrange="-0.005 .04"/> -->
-          <position ctrlrange="-0.005 .04" kp="100"/>
+          <position ctrlrange="-0.04 .04" kp="100"/>
         </default>
     </default>
 
@@ -343,7 +343,7 @@
 
 
                           <!-- Gripper Mechanism -->
-                            <body name="link_gripper_slider" euler="0 0 0" pos="0 0 0.03" gravcomp="1">
+                            <body name="link_gripper_slider" euler="0 0 0" pos="0 0 0" gravcomp="1">
                               <joint name="joint_gripper_slide" class="finger_slide"/>
                               <geom type="box" size=".03 .005 .005" mass=".05" class="visual" rgba="0 0 0 0"/>
 

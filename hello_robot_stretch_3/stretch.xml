@@ -196,7 +196,7 @@
     <mesh file="link_SG3_gripper_left_inner_finger.stl"/>
     <mesh file="link_SG3_gripper_right_inner_finger.stl"/>
 
-    <mesh file="inner_left.stl"/>
+    <mesh file="link_SG3_gripper_inner_finger.stl"/>
 
     <mesh file="link_SG3_gripper_left_finger_aruco.stl"/>
     <mesh file="link_SG3_gripper_right_finger_aruco.stl"/>
@@ -353,8 +353,8 @@
                                 <joint name="joint_gripper_finger_left_open" class="finger_open"/>
                                 <geom mesh="link_SG3_gripper_left_finger" material="White_Plastic" mass="0.05" class="visual"/>
                                 <geom mesh="link_SG3_gripper_left_finger" class="collision"/>
-                                <geom name="inner_left" mesh="inner_left" pos="-0.17777 0.0018452 -0.011272" euler="3.1416 -0.28 0" material="Reflective_Metal" mass="0.05" class="visual"/>
-                                <!-- <geom mesh="link_SG3_gripper_left_inner_finger" class="collision"/> -->
+                                <geom mesh="link_SG3_gripper_inner_finger" pos="-0.17777 0.0018452 -0.011272" euler="3.1416 0.28 0" material="Reflective_Metal" mass="0.05" class="visual"/>
+                                <!-- <geom mesh="link_SG3_gripper_left_inner_finger" class="collision"/> euler="3.1416 -0.28 0" -->
                                 <body name="rubber_tip_left" pos="-0.17777 0.0018452 -0.011272" euler="0 -0.2618 -0.010379">
                                   <joint name="rubber_left_x" type="hinge" axis="1 0 0" damping="0.001" stiffness="0.05"/>
                                   <joint name="rubber_left_y" type="hinge" axis="0 1 0" damping="0.001" stiffness="0.05"/>
@@ -367,7 +367,7 @@
                                 <joint name="joint_gripper_finger_right_open" class="finger_open"/>
                                 <geom mesh="link_SG3_gripper_right_finger" material="White_Plastic" mass="0.05" class="visual"/>
                                 <geom mesh="link_SG3_gripper_right_finger" class="collision"/>
-                                <geom name="inner_right" mesh="inner_left" pos="0.17778 0 0.011272" euler="3.1416 2.8616 0" material="Reflective_Metal" mass="0.05" class="visual"/>
+                                <geom mesh="link_SG3_gripper_inner_finger" pos="0.17778 0 0.011272" euler="3.1416 -2.8616 0" material="Reflective_Metal" mass="0.05" class="visual"/>
                                 <!-- <geom mesh="link_SG3_gripper_right_inner_finger" class="collision"/> -->
                                 <body name="rubber_tip_right" pos="0.17778 0 0.011272" euler="-3.1416 0.2618 -3.1416">
                                   <joint name="rubber_right_x" type="hinge" axis="1 0 0" damping="0.001" stiffness="0.05"/>

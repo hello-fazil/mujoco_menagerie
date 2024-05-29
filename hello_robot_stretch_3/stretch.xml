@@ -53,9 +53,8 @@
           <joint axis="0 -1 0" range="-0.6 0.6" damping=".1"/>
         </default>
         <default class="finger_slide">
-          <joint type="slide" axis="0 0 1" range="-0.04 .04" damping=".1"/>
-          <!-- <general gainprm="1" biasprm="0 -2000 -200" ctrlrange="-0.005 .04"/> -->
-          <position ctrlrange="-0.04 .04" kp="100"/>
+          <joint type="slide" axis="0 0 1" range="-0.02 .04" damping=".1"/>
+          <general gainprm="2000" biasprm="0 -2000 -200" ctrlrange="-0.02 .04"/>
         </default>
     </default>
 

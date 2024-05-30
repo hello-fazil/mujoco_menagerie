@@ -192,7 +192,7 @@
     <mesh file="link_DW3_wrist_quick_connect.stl"/>
     <mesh file="link_DW3_wrist_yaw_bottom.stl"/>
     <mesh file="link_SE3_head_nav_cam.stl"/>
-    <mesh file="link_SG3_aruco_d405.stl"/>
+    <mesh file="link_SG3_aruco_d405.obj"/>
     <mesh file="link_SG3_gripper_body.stl"/>
 
     <mesh file="link_SG3_gripper_left_finger.stl"/>
@@ -203,8 +203,8 @@
 
     <mesh file="link_SG3_gripper_inner_finger.stl"/>
 
-    <mesh file="link_SG3_gripper_left_finger_aruco.stl"/>
-    <mesh file="link_SG3_gripper_right_finger_aruco.stl"/>
+    <mesh file="link_SG3_gripper_left_finger_aruco.obj"/>
+    <mesh file="link_SG3_gripper_right_finger_aruco.obj"/>
 
     <mesh file="link_SG3_gripper_right_fingertip.stl"/>
     <mesh file="link_SG3_gripper_left_fingertip.stl"/>
@@ -348,6 +348,11 @@
                           <geom material="Generic_Black" mesh="link_SG3_gripper_body" mass="0.29" class="visual"/>
                           <geom mesh="link_SG3_gripper_body" class="collision"/>
 
+                          <body name="link_SG3_aruco_d405" pos="0 0.0671264013906604 0.0297716109784749" euler="-1.397059993 -0.000305721573415565 -0.001741181"> 
+                            <geom material="Aruco_gripper_cam_Sticker" mesh="link_SG3_aruco_d405" class="visual" mass="3.6E-06"
+                            shellinertia="true"/>
+                            <geom mesh="link_SG3_aruco_d405" class="collision"/>
+                          </body>
 
                           <!-- Gripper Mechanism -->
                             <body name="link_gripper_slider" euler="0 0 0" pos="0 0 0" gravcomp="1">

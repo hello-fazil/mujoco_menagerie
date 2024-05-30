@@ -92,6 +92,7 @@
     <material name="Pantone_Black_6_U" rgba="0.072272 0.076185 0.093059 1"/>
     <material name="Plug_White" rgba="1 1 1 1"/>
     <material name="Pure_Black" rgba="0 0 0 1"/>
+    <material name="Gray_Lens" rgba="0.3 0.3 0.3 1"/>
     <material name="Reflective_Metal" rgba="0.8 0.8 0.8 1"/>
     <material name="Respeaker_Blue_Glow" rgba="0.006995 0.054480 0.799103 1"/>
     <material name="Runstop_White_Glow" rgba="0.8 0.8 0.8 1"/>
@@ -193,7 +194,11 @@
     <mesh file="link_DW3_wrist_yaw_bottom.stl"/>
     <mesh file="link_SE3_head_nav_cam.stl"/>
     <mesh file="link_SG3_aruco_d405.obj"/>
-    <mesh file="link_SG3_gripper_body.stl"/>
+    <mesh file="link_SG3_gripper_body.obj"/>
+
+    <mesh file="link_d405.stl"/>
+    <mesh file="link_d405_lens.stl"/>
+    <mesh file="link_d405_front_plate.stl"/>
 
     <mesh file="link_SG3_gripper_left_finger.stl"/>
     <mesh file="link_SG3_gripper_right_finger.stl"/>
@@ -352,6 +357,12 @@
                             <geom material="Aruco_gripper_cam_Sticker" mesh="link_SG3_aruco_d405" class="visual" mass="3.6E-06"
                             shellinertia="true"/>
                             <geom mesh="link_SG3_aruco_d405" class="collision"/>
+                            <body name="link_d405" pos="0 -0.03068 0" euler="1.57 0 0"> 
+                              <geom material="Reflective_Metal" mesh="link_d405" mass="0.29" class="visual"/>
+                              <geom material="Gray_Lens" mesh="link_d405_lens" pos="0 0 0" euler="0 0 0" mass="3.6E-06" class="visual"/>
+                              <geom material="Pantone_Black_6_U" mesh="link_d405_front_plate" pos="0 0 0" euler="0 0 0" mass="3.6E-06" class="visual"/>
+                              <!-- <geom mesh="link_d405" class="collision"/> -->
+                            </body>
                           </body>
                           <body name="link_grasp_center" pos="0 0 0.23" euler="-1.5707963267949 -1.5707963267948 0"> </body>
                           

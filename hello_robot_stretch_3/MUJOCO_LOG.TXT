@@ -59620,3 +59620,12 @@ WARNING: Inertia matrix is too close to singular at DOF 16. Check model. Time = 
 Tue May 28 12:50:35 2024
 WARNING: Inertia matrix is too close to singular at DOF 16. Check model. Time = 0.0000.
 
+Thu May 30 19:47:12 2024
+WARNING: OpenGL error 0x501 in or before mjr_makeContext
+
+Fri May 31 11:12:42 2024
+WARNING: OpenGL error 0x501 in or before mjr_makeContext
+
+Fri May 31 14:13:33 2024
+WARNING: Nan, Inf or huge value in QACC at DOF 14. The simulation is unstable. Time = 13.2140.
+

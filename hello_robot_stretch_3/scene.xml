@@ -14,6 +14,7 @@
     <texture type="2d" name="wood" file="wood.png"/>
     <material name="wood" texture="wood"/>
     <material name="object" rgba=".2 .2 .2 1"/>
+    <texture type="skybox" builtin="gradient" rgb1="0.44 0.80 1.00" rgb2="1 1 1" width="512" height="3072"/>
   </asset>
 
   <worldbody>

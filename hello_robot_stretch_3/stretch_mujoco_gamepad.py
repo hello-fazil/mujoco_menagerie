@@ -21,10 +21,10 @@ button_mapping = {'top_pad_pressed':['wrist_pitch', 1, 0.1],
                   'bottom_button_pressed': ['gripper',-1, 0.01]
                   }
 
-stick_mapping = {'right_stick_x': ('arm', 'inc'),
-                 'right_stick_y': ('lift', 'inc'),
-                 'left_stick_x': ('turn', 'scale'),
-                 'left_stick_y': ('forward', 'scale')}
+stick_mapping = {'right_stick_x': ('arm', 'inc',0.1),
+                 'right_stick_y': ('lift', 'inc',0.3),
+                 'left_stick_x': ('turn', 'scale',1),
+                 'left_stick_y': ('forward', 'scale',1)}
 
 dex_switch = False
 while True:
@@ -56,13 +56,13 @@ while True:
 
     for stick in stick_mapping.keys():
         if abs(gamepad_state[stick])>0.001:
-            actuator_name, prop = stick_mapping[stick]
+            actuator_name, prop, val = stick_mapping[stick]
             if prop == 'inc':
-                pos = robot_sim.status[actuator_name]['pos'] + gamepad_state[stick]*0.3
+                pos = robot_sim.status[actuator_name]['pos'] + gamepad_state[stick]*val
                 robot_sim.move_to(actuator_name, pos)
                 print(f"Moving {actuator_name} to {pos}")
             if prop == 'scale':
-                robot_sim.move_to(actuator_name, gamepad_state[stick])
+                robot_sim.move_to(actuator_name, gamepad_state[stick]*val)
     if abs(gamepad_state['left_stick_x']) < 0.001:
         robot_sim.move_to('turn', 0)
     if abs(gamepad_state['left_stick_y']) < 0.001:

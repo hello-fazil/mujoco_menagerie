@@ -15,7 +15,7 @@
       </default>
       <default class="lift">
         <joint type="slide" axis="0 0 1" damping="5" range="0.0 1.1"/>
-        <general ctrlrange="0.0 1.1" gainprm="300" biasprm="0 -300 -50" forcerange="-56 56"/>
+        <general ctrlrange="0.0 1.1" gainprm="300" biasprm="0 -300 -50" forcerange="-70 70"/>
       </default>
       <default class="telescope">
         <joint type="slide" axis="0 0 1" damping="5" range="0 0.13"/>
@@ -54,7 +54,7 @@
           <position ctrlrange="-0.6 0.6" kp="4000" kv="124"/>
         </default>
         <default class="finger_slide">
-          <joint type="slide" axis="0 0 1" range="-0.02 .04" armature="0.243" damping="0.0001"/>
+          <joint type="slide" axis="0 0 1" range="-0.02 .04" armature="0.5" damping="0.0001"/>
           <!-- <general gainprm="2000" biasprm="0 -2000 -200" ctrlrange="-0.02 .04"/> -->
           <position ctrlrange="-0.02 .04" kp="4000" kv="124"/>
         </default>
@@ -531,8 +531,6 @@
     <general name="gripper" joint="joint_gripper_slide" class="finger_slide"/>
     <position name="head_pan" joint="joint_head_pan" class="head_pan"/>
     <position name="head_tilt" joint="joint_head_tilt" class="head_tilt"/>
-    <!-- <adhesion name="adhere_gripper_left" body="rubber_tip_left" ctrlrange="0 1" gain="50"/>
-    <adhesion name="adhere_gripper_right" body="rubber_tip_right" ctrlrange="0 1" gain="50"/> -->
   </actuator>
 
 </mujoco>

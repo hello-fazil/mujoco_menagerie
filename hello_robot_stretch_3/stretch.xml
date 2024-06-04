@@ -335,7 +335,6 @@
                       mass="3.6E-06" shellinertia="true"/>
                     <geom mesh="link_aruco_inner_wrist" class="collision"/>
                   </body>
-
                   <!-- Dex Wrist 3 Tree -->
                   <body name="link_wrist_yaw" pos="0.083 -0.03075 0" quat="-1 -1 0 0" gravcomp="1">
                     <joint name="joint_wrist_yaw" class="wrist_yaw"/>
@@ -353,7 +352,6 @@
                           <joint name="joint_wrist_roll" class="wrist_roll"/>
                           <geom material="Generic_Black" mesh="link_SG3_gripper_body" mass="0.29" class="visual"/>
                           <geom mesh="link_SG3_gripper_body" class="collision"/>
-
                           <body name="link_SG3_aruco_d405" pos="0 0.0671264013906604 0.0297716109784749" euler="-1.397059993 -0.000305721573415565 -0.001741181" gravcomp="1"> 
                             <geom material="Aruco_gripper_cam_Sticker" mesh="link_SG3_aruco_d405" class="visual" mass="3.6E-06"
                             shellinertia="true"/>
@@ -370,7 +368,6 @@
                             </body>
                           </body>
                           <body name="link_grasp_center" pos="0 0 0.23" euler="-1.5707963267949 -1.5707963267948 0"> </body>
-                          
                           <!-- Gripper Mechanism -->
                             <body name="link_gripper_slider" euler="0 0 0" pos="0 0 0" gravcomp="1">
                               <joint name="joint_gripper_slide" class="finger_slide"/>
@@ -414,8 +411,6 @@
                             </body>
                         </body>
                       </body>
-                      
-                    
                   </body>
                 </body>
               </body>
@@ -478,14 +473,10 @@
     <exclude body1="link_wrist_yaw" body2="link_arm_l2"/>
     <exclude body1="link_wrist_yaw" body2="link_arm_l3"/>
     <exclude body1="link_wrist_yaw" body2="link_arm_l4"/>
-    
-    <!-- <exclude body1="link_wrist_yaw" body2="link_DW3_wrist_pitch"/> -->
     <exclude body1="link_gripper_finger_left" body2="link_DW3_wrist_pitch"/>
     <exclude body1="link_gripper_finger_right" body2="link_DW3_wrist_pitch"/>
-
     <exclude body1="link_gripper_finger_left" body2="link_wrist_yaw"/>
     <exclude body1="link_gripper_finger_right" body2="link_wrist_yaw"/>
-
     <exclude body1="link_gripper_finger_left" body2="link_SG3_gripper_body"/>
     <exclude body1="link_gripper_finger_right" body2="link_SG3_gripper_body"/>
     <exclude body1="rubber_tip_right" body2="rubber_tip_left"/>

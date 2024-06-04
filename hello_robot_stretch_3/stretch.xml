@@ -520,4 +520,9 @@
     <position name="head_tilt" joint="joint_head_tilt" class="head_tilt"/>
   </actuator>
 
+
+  <keyframe>
+    <key name="home" ctrl="0 0 0.6 0.1 0 0 0 0 0 0"/>
+  </keyframe>
+
 </mujoco>

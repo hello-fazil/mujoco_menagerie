@@ -4,6 +4,7 @@ from mujoco import MjModel, MjData
 import time
 import threading
 import cv2
+import matplotlib.pyplot as plt
 
 class StretchMujocoSimulator:
     def __init__(self, 
@@ -74,14 +75,13 @@ class StretchMujocoSimulator:
         data = {}
         self.rgb_renderer.update_scene(self.mjdata,'d405_rgb')
         self.depth_renderer.update_scene(self.mjdata,'d405_rgb')
-
         data['cam_d405_rgb'] = self.rgb_renderer.render()
         data['cam_d405_depth'] = self.depth_renderer.render()
 
         self.rgb_renderer.update_scene(self.mjdata,'d435i_camera_rgb')
         self.depth_renderer.update_scene(self.mjdata,'d435i_camera_rgb')
-        data['cam_d435i_rgb'] = self.rgb_renderer.render()
-        data['cam_d435i_depth'] = self.depth_renderer.render()
+        data['cam_d435i_rgb'] = cv2.rotate(self.rgb_renderer.render(), cv2.ROTATE_90_COUNTERCLOCKWISE)
+        data['cam_d435i_depth'] = cv2.rotate(self.depth_renderer.render(), cv2.ROTATE_90_COUNTERCLOCKWISE)
 
         self.rgb_renderer.update_scene(self.mjdata,'nav_camera_rgb')
         data['cam_nav_rgb'] = self.rgb_renderer.render()
@@ -114,3 +114,4 @@ if __name__ == "__main__":
         cv2.imshow('cam_nav_rgb', camera_data['cam_nav_rgb'])
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+        

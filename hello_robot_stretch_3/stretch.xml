@@ -1,7 +1,7 @@
 <mujoco model="stretch">
   <compiler angle="radian" assetdir="assets" autolimits="true"/>
 
-  <option integrator="implicitfast" impratio="10" cone="elliptic" noslip_iterations="2">
+  <option integrator="implicitfast" impratio="10" cone="elliptic" noslip_iterations="3">
     <flag multiccd="enable"/>
   </option>
 
@@ -50,10 +50,11 @@
           <position ctrlrange="-3.14 3.14"/>
         </default>
         <default class="finger_open">
-          <joint axis="0 -1 0" range="-0.6 0.6" armature="0.243" damping="40"/>
+          <joint axis="0 -1 0" range="-0.6 0.6" damping="0.0001"/>
+          <position ctrlrange="-0.6 0.6" kp="4000" kv="124"/>
         </default>
         <default class="finger_slide">
-          <joint type="slide" axis="0 0 1" range="-0.02 .04" armature="0.243" damping="40"/>
+          <joint type="slide" axis="0 0 1" range="-0.02 .04" armature="0.243" damping="0.0001"/>
           <!-- <general gainprm="2000" biasprm="0 -2000 -200" ctrlrange="-0.02 .04"/> -->
           <position ctrlrange="-0.02 .04" kp="4000" kv="124"/>
         </default>
@@ -383,7 +384,7 @@
                                 <body name="rubber_tip_left" pos="-0.17777 0.0018452 -0.011272" euler="0 -0.2618 -0.010379">
                                   <joint name="rubber_left_x" type="hinge" axis="1 0 0" damping="0.01" stiffness="0.05" springref="0"/>
                                   <joint name="rubber_left_y" type="hinge" axis="0 1 0" damping="0.01" stiffness="0.05" springref="0"/>
-                                  <joint name="rubber_left_z" type="hinge" axis="0 0 1" damping="0.01" stiffness="0.05" springref="0"/>
+                                  <!-- <joint name="rubber_left_z" type="hinge" axis="0 0 1" damping="0.01" stiffness="0.05" springref="0"/> -->
                                   <geom class="visual" mesh="link_SG3_gripper_fingertip_collision" mass="0.005" material="suction_rubber"/>
                                   <geom mesh="link_SG3_gripper_fingertip_collision" class="collision"/>
                                   <geom mesh="link_SG3_gripper_fingertip_collision" class="rubber"/>
@@ -403,7 +404,7 @@
                                 <body name="rubber_tip_right" pos="0.17778 0 0.011272" euler="-3.1416 0.2618 -3.1416">
                                   <joint name="rubber_right_x" type="hinge" axis="1 0 0" damping="0.01" stiffness="0.05" springref="0"/>
                                   <joint name="rubber_right_y" type="hinge" axis="0 1 0" damping="0.01" stiffness="0.05" springref="0"/>
-                                  <joint name="rubber_right_z" type="hinge" axis="0 0 1" damping="0.01" stiffness="0.05" springref="0"/>
+                                  <!-- <joint name="rubber_right_z" type="hinge" axis="0 0 1" damping="0.01" stiffness="0.05" springref="0"/> -->
                                   <geom class="visual" material="suction_rubber" mesh="link_SG3_gripper_fingertip_collision" mass="0.005"/>
                                   <geom mesh="link_SG3_gripper_fingertip_collision" class="collision"/>
                                   <geom mesh="link_SG3_gripper_fingertip_collision" class="rubber"/>

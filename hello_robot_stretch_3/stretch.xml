@@ -68,7 +68,7 @@
           <geom type="sphere" size=".02" pos="-0.24 0 .02" condim="1" priority="1"/>
         </default>
         <default class="rubber">
-          <geom condim="6" friction="2 0.02 0.01" priority="1" solref="0.1 1" solimp="0.99 0.99 0.01" conaffinity="1"/>
+          <geom condim="6" friction="2 0.02 0.01" priority="1" solref="0.02 1" solimp="0.99 0.99 0.01" conaffinity="1"/>
         </default>
       </default>
     </default>
@@ -384,10 +384,11 @@
                                 <geom mesh="link_SG3_gripper_left_finger" class="collision"/>
                                 <geom mesh="link_SG3_gripper_inner_finger" pos="-0.17777 0.0018452 -0.011272" euler="3.1416 0.28 0" material="Reflective_Metal" mass="0.05" class="visual"/>
                                 <body name="rubber_tip_left" pos="-0.17777 0.0018452 -0.011272" euler="0 -0.2618 -0.010379">
-                                  <joint name="rubber_left_x" type="hinge" axis="1 0 0" damping=".01" stiffness="0.05" springref="0"/>
-                                  <joint name="rubber_left_y" type="hinge" axis="0 1 0" damping=".01" stiffness="0.05" springref="0"/>
-                                  <geom class="visual" mesh="link_SG3_gripper_fingertip_collision" mass="0.005" material="suction_rubber"/>
-                                  <geom mesh="link_SG3_gripper_fingertip_collision" class="rubber"/>
+                                  <joint name="rubber_left_x" type="hinge" axis="1 0 0" damping=".01" stiffness="1" springref="0"/>
+                                  <joint name="rubber_left_y" type="hinge" axis="0 1 0" damping=".01" stiffness="1" springref="0"/>
+                                  <!-- <geom class="visual" mesh="link_SG3_gripper_left_fingertip" mass="0.005" material="suction_rubber"/> -->
+                                  <geom class="visual" type="box" size="0.02 0.02 0.01" pos="0 0 0.01" mass="0.005" material="suction_rubber"/>
+                                  <geom type="box"  size="0.02 0.02 0.01" pos="0 0 0.01" class="rubber"/>
                                 </body>
                                 <body name="link_SG3_gripper_left_finger_aruco" pos="-0.14425 0.0014877 -0.005189" euler="0.19199 0.95993 3.1312"> 
                                   <geom material="Aruco_left_finger_Sticker" mesh="link_SG3_gripper_left_finger_aruco" class="visual" mass="3.6E-06" shellinertia="true"/>
@@ -401,10 +402,11 @@
                                 <geom mesh="link_SG3_gripper_right_finger" class="collision"/>
                                 <geom mesh="link_SG3_gripper_inner_finger" pos="0.17778 0 0.011272" euler="3.1416 -2.8616 0" material="Reflective_Metal" mass="0.05" class="visual"/>
                                 <body name="rubber_tip_right" pos="0.17778 0 0.011272" euler="-3.1416 0.2618 -3.1416" gravcomp="1">
-                                  <joint name="rubber_right_x" type="hinge" axis="1 0 0" damping=".01" stiffness="0.05" springref="0"/>
-                                  <joint name="rubber_right_y" type="hinge" axis="0 1 0" damping=".01" stiffness="0.05" springref="0"/>
-                                  <geom class="visual" material="suction_rubber" mesh="link_SG3_gripper_fingertip_collision" mass="0.005"/>
-                                  <geom mesh="link_SG3_gripper_fingertip_collision" class="rubber"/>
+                                  <joint name="rubber_right_x" type="hinge" axis="1 0 0" damping=".01" stiffness="1" springref="0"/>
+                                  <joint name="rubber_right_y" type="hinge" axis="0 1 0" damping=".01" stiffness="1" springref="0"/>
+                                  <!-- <geom class="visual" material="suction_rubber" mesh="link_SG3_gripper_right_fingertip" mass="0.005"/> -->
+                                  <geom class="visual" type="box"  size="0.02 0.02 0.01" pos="0 0 0.01" mass="0.005" material="suction_rubber"/>
+                                  <geom type="box"   size="0.02 0.02 0.01" pos="0 0 0.01" class="rubber"/>
                                 </body>
                                 <body name="link_SG3_gripper_right_finger_aruco" pos="0.14426 0 0.005189" euler="-2.9496 -0.95993 3.1416"> 
                                   <geom material="Aruco_right_finger_Sticker" mesh="link_SG3_gripper_right_finger_aruco" class="visual" mass="3.6E-06" shellinertia="true"/>

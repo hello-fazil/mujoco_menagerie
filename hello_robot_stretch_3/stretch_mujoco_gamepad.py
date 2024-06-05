@@ -5,10 +5,8 @@ import threading
 import cv2
 
 robot_sim = StretchMujocoSimulator()
-robot_sim.start()
-
 gamepad = GamePadController()
-gamepad.start()
+
 
 def display_camera_feeds():
     # display camera feeds
@@ -59,7 +57,6 @@ def gamepad_loop():
                         robot_sim.move_to(actuator_name, pos)
                     elif actuator_name == 'gripper':
                         gripper_val = gripper_val + dir*k
-                        # clip gripper value between x and y
                         gripper_val = max(min(gripper_val, 0.04), -0.02)
                         print(f"Moving {actuator_name} to {gripper_val}")
                         robot_sim.move_to(actuator_name, gripper_val)                        
@@ -99,5 +96,7 @@ def gamepad_loop():
             robot_sim.stow()
 
 if __name__ == '__main__':
+    robot_sim.start()
+    gamepad.start()
     threading.Thread(target=gamepad_loop).start()
     display_camera_feeds()

@@ -43,7 +43,7 @@
         </default>
         <default class="wrist_pitch">
           <joint axis="0 0 1" range="-1.57 0.56" armature="0.01" frictionloss=".1"/>
-          <position ctrlrange="-1.57 0.56" kp="35"/>
+          <position ctrlrange="-1.57 0.56" kp="50"/>
         </default>
         <default class="wrist_roll">
           <joint axis="0 0 1" range="-3.14 3.14" armature="0.01" frictionloss=".1"/>

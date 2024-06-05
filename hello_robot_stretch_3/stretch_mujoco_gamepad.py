@@ -23,15 +23,15 @@ def display_camera_feeds():
             break
 
 button_mapping = {'top_pad_pressed':['wrist_pitch', 1, 0.05],
-                  'bottom_pad_pressed':['wrist_pitch', -1, 0.5],
+                  'bottom_pad_pressed':['wrist_pitch', -1, 0.05],
                   'left_pad_pressed':['wrist_roll', -1, 0.07],
                   'right_pad_pressed':['wrist_roll', 1, 0.07],
                   'right_shoulder_button_pressed':['wrist_yaw', -1, 0.2],
                   'left_shoulder_button_pressed':['wrist_yaw', 1, 0.2],
                   'top_button_pressed': ['stow', 0],
                   'left_button_pressed': ['dex_switch', 0],
-                  'right_button_pressed': ['gripper',1, 0.005],
-                  'bottom_button_pressed': ['gripper',-1, 0.005]
+                  'right_button_pressed': ['gripper',1, 0.003],
+                  'bottom_button_pressed': ['gripper',-1, 0.003]
                   }
 
 stick_mapping = {'right_stick_x': ('arm', 'inc',0.05),
@@ -44,19 +44,28 @@ def map_value(value, in_min, in_max, out_min, out_max):
 
 def gamepad_loop():
     dex_switch = False
+    gripper_val = robot_sim.status['gripper']['pos']
     while True:
         time.sleep(1/15)
         gamepad_state = gamepad.get_state()
         for button in button_mapping.keys():
             if gamepad_state[button]:
                 try:
+                    
                     actuator_name, dir, k = button_mapping[button]
-                    pos = robot_sim.status[actuator_name]['pos'] + dir*k
-                    print(f"Moving {actuator_name} to {pos}")
-                    robot_sim.move_to(actuator_name, pos)
+                    if actuator_name != 'gripper':
+                        pos = robot_sim.status[actuator_name]['pos'] + dir*k
+                        print(f"Moving {actuator_name} to {pos}")
+                        robot_sim.move_to(actuator_name, pos)
+                    elif actuator_name == 'gripper':
+                        gripper_val = gripper_val + dir*k
+                        # clip gripper value between x and y
+                        gripper_val = max(min(gripper_val, 0.04), -0.02)
+                        print(f"Moving {actuator_name} to {gripper_val}")
+                        robot_sim.move_to(actuator_name, gripper_val)                        
+
                 except:
                     pass
-
         if gamepad_state['left_button_pressed']:
             dex_switch = not dex_switch
             print(f"Setting dex_switch to {dex_switch}")

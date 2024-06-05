@@ -1,12 +1,17 @@
+"""
+Python sample script for interfacing with the Stretch Mujoco simulator
+"""
+import time
+import threading
 import mujoco
 import mujoco.viewer
 from mujoco import MjModel, MjData
-import time
-import threading
 import cv2
-import matplotlib.pyplot as plt
 
 class StretchMujocoSimulator:
+    """
+    StretchMujocoSimulator sample class for simulating Stretch robot in Mujoco
+    """
     def __init__(self, 
                  scene_xml_path: str = "./scene.xml"):
         self.mjmodel = mujoco.MjModel.from_xml_path(scene_xml_path)
@@ -29,24 +34,40 @@ class StretchMujocoSimulator:
                       }
     
     def home(self)->None:
+        """
+        Move the robot to home position"""
         self.mjdata.ctrl = self.mjmodel.keyframe('home').ctrl
 
-    def move_to(self, 
-                actuator_name: str, 
-                pos: float)->None:
+    def stow(self)->None:
+        """
+        Move the robot to stow position"""
+        self.mjdata.ctrl = self.mjmodel.keyframe('stow').ctrl
+
+    def move_to(self,
+                actuator_name:str,
+                pos:float)->None:
+        """
+        Move the actuator to a specific position"""
         self.mjdata.actuator(actuator_name).ctrl = pos
 
     def move_by(self, 
-                actuator_name: str, 
-                pos: float)->None:
+                actuator_name:str, 
+                pos:float)->None:
+        """
+        Move the actuator by a specific amount"""
         self.mjdata.actuator(actuator_name).ctrl = self.status[actuator_name]['pos'] + pos
     
     def set_velocity(self, 
-                     actuator_name: str, 
-                     vel: float)->None:
+                     actuator_name:str, 
+                     vel:float)->None:
+        """
+        Set the velocity of the actuator"""
+        # TODO: Implement this method by ether moving to integrated velocity controller or have seperate robot xml replacing position with velocity actuator ctrl
         raise NotImplementedError
     
     def pull_status(self)->None:
+        """
+        Pull joints status of the robot from the simulator"""
         self.status['lift']['pos'] = self.mjdata.actuator('lift').length[0]
         self.status['lift']['vel'] = self.mjdata.actuator('lift').velocity[0]
 
@@ -72,22 +93,26 @@ class StretchMujocoSimulator:
         self.status['gripper']['vel'] = self.mjdata.actuator('gripper').velocity[0]
     
     def pull_camera_data(self)->dict:
+        """
+        Pull camera data from the simulator"""
         data = {}
         self.rgb_renderer.update_scene(self.mjdata,'d405_rgb')
         self.depth_renderer.update_scene(self.mjdata,'d405_rgb')
-        data['cam_d405_rgb'] = self.rgb_renderer.render()
+        data['cam_d405_rgb'] = cv2.cvtColor(self.rgb_renderer.render(), cv2.COLOR_RGB2BGR)
         data['cam_d405_depth'] = self.depth_renderer.render()
 
         self.rgb_renderer.update_scene(self.mjdata,'d435i_camera_rgb')
         self.depth_renderer.update_scene(self.mjdata,'d435i_camera_rgb')
-        data['cam_d435i_rgb'] = cv2.rotate(self.rgb_renderer.render(), cv2.ROTATE_90_COUNTERCLOCKWISE)
+        data['cam_d435i_rgb'] = cv2.rotate(cv2.cvtColor(self.rgb_renderer.render(), cv2.COLOR_RGB2BGR), cv2.ROTATE_90_COUNTERCLOCKWISE)
         data['cam_d435i_depth'] = cv2.rotate(self.depth_renderer.render(), cv2.ROTATE_90_COUNTERCLOCKWISE)
 
         self.rgb_renderer.update_scene(self.mjdata,'nav_camera_rgb')
-        data['cam_nav_rgb'] = self.rgb_renderer.render()
+        data['cam_nav_rgb'] = cv2.cvtColor(self.rgb_renderer.render(), cv2.COLOR_RGB2BGR)
         return data
 
     def robot_control_callback(self, model: MjModel, data: MjData)->None:
+        """
+        Callback function for controlling the robot in the simulator"""
         self.mjdata = data
         self.mjmodel = model
         self.pull_status()
@@ -95,8 +120,12 @@ class StretchMujocoSimulator:
     def __run(self)->None:
         mujoco.set_mjcb_control(self.robot_control_callback)
         mujoco.viewer.launch(self.mjmodel)
-    
+
     def start(self)->None:
+        """
+        Start the simulator in a using blocking Managed-vieiwer for precise timing. And user code is looped through callback.
+        For some projects a non-blocking Passive-vieiwer might be more suitable. For more info visit:
+        https://mujoco.readthedocs.io/en/stable/python.html#managed-viewer"""
         threading.Thread(target=self.__run).start()
         time.sleep(0.5)
         self.home()

@@ -22,20 +22,20 @@ def display_camera_feeds():
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
-button_mapping = {'top_pad_pressed':['wrist_pitch', 1, 0.1],
-                  'bottom_pad_pressed':['wrist_pitch', -1, 0.1],
+button_mapping = {'top_pad_pressed':['wrist_pitch', 1, 0.05],
+                  'bottom_pad_pressed':['wrist_pitch', -1, 0.5],
                   'left_pad_pressed':['wrist_roll', -1, 0.07],
                   'right_pad_pressed':['wrist_roll', 1, 0.07],
-                  'right_shoulder_button_pressed':['wrist_yaw', -1, 0.1],
-                  'left_shoulder_button_pressed':['wrist_yaw', 1, 0.1],
+                  'right_shoulder_button_pressed':['wrist_yaw', -1, 0.2],
+                  'left_shoulder_button_pressed':['wrist_yaw', 1, 0.2],
                   'top_button_pressed': ['stow', 0],
                   'left_button_pressed': ['dex_switch', 0],
-                  'right_button_pressed': ['gripper',1, 0.01],
-                  'bottom_button_pressed': ['gripper',-1, 0.01]
+                  'right_button_pressed': ['gripper',1, 0.005],
+                  'bottom_button_pressed': ['gripper',-1, 0.005]
                   }
 
-stick_mapping = {'right_stick_x': ('arm', 'inc',0.1),
-                 'right_stick_y': ('lift', 'inc',0.3),
+stick_mapping = {'right_stick_x': ('arm', 'inc',0.05),
+                 'right_stick_y': ('lift', 'inc',0.15),
                  'left_stick_x': ('turn', 'scale',1),
                  'left_stick_y': ('forward', 'scale',1)}
 
@@ -81,6 +81,9 @@ def gamepad_loop():
             robot_sim.move_to('turn', 0)
         if abs(gamepad_state['left_stick_y']) < 0.001:
             robot_sim.move_to('forward', 0)
+        if gamepad_state['top_button_pressed']:
+            robot_sim.stow()
+
 if __name__ == '__main__':
     threading.Thread(target=gamepad_loop).start()
     display_camera_feeds()

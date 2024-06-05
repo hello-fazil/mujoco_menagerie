@@ -39,6 +39,9 @@ stick_mapping = {'right_stick_x': ('arm', 'inc',0.05),
                  'left_stick_x': ('turn', 'scale',1),
                  'left_stick_y': ('forward', 'scale',1)}
 
+def map_value(value, in_min, in_max, out_min, out_max):
+    return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+
 def gamepad_loop():
     dex_switch = False
     while True:
@@ -75,12 +78,14 @@ def gamepad_loop():
                     pos = robot_sim.status[actuator_name]['pos'] + gamepad_state[stick]*val
                     robot_sim.move_to(actuator_name, pos)
                     print(f"Moving {actuator_name} to {pos}")
-                if prop == 'scale':
-                    robot_sim.move_to(actuator_name, gamepad_state[stick]*val)
-        if abs(gamepad_state['left_stick_x']) < 0.001:
-            robot_sim.move_to('turn', 0)
-        if abs(gamepad_state['left_stick_y']) < 0.001:
-            robot_sim.move_to('forward', 0)
+        if abs(gamepad_state['left_stick_x']) < 0.001 and abs(gamepad_state['left_stick_y']) < 0.001:
+            robot_sim.set_base_velocity(0, 0)
+        else:
+            v_linear = map_value(gamepad_state['left_stick_y'], -1, 1, -0.3, 0.3)
+            omega = -map_value(gamepad_state['left_stick_x'], -1, 1, -2, 2)
+            robot_sim.set_base_velocity(v_linear, omega)
+            print(f"Setting base velocity to {v_linear, omega}")
+
         if gamepad_state['top_button_pressed']:
             robot_sim.stow()
 

@@ -14,8 +14,8 @@
         <velocity gear="3" kv="100" ctrlrange="-6 6" forcerange="-100 100"/>
       </default>
       <default class="lift">
-        <joint type="slide" axis="0 0 1" damping="35" stiffness="0.02" armature="0.01" range="0.0 1.1" frictionloss="1.5"/>
-        <general ctrlrange="0.0 1.1" gainprm="150" biasprm="0 -150 -50" forcerange="-70 70"/>
+        <joint type="slide" axis="0 0 1" damping="35" stiffness="0.03" armature="0.01" range="0.0 1.1" frictionloss="1.5"/>
+        <general ctrlrange="0.0 1.1" gainprm="400" biasprm="0 -200 -100" forcerange="-70 70"/>
       </default>
       <default class="telescope">
         <joint type="slide" axis="0 0 1" damping="50" stiffness="0.02" armature="0.01" range="0 0.13" frictionloss="1.5"/>

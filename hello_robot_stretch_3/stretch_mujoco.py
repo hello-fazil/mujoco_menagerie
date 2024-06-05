@@ -20,7 +20,8 @@ class StretchMujocoSimulator:
         self.rgb_renderer = mujoco.Renderer(self.mjmodel, height=480, width=640)
         self.depth_renderer = mujoco.Renderer(self.mjmodel, height=480, width=640)
         self.depth_renderer.enable_depth_rendering()
-
+        self.wheel_diameter = 0.1016
+        self.wheel_seperation = 0.3153
         self.status = {
                        'base': {'x_vel': None,'theta_vel': None},
                        'lift': {'pos': None,'vel': None},
@@ -57,12 +58,23 @@ class StretchMujocoSimulator:
         Move the actuator by a specific amount"""
         self.mjdata.actuator(actuator_name).ctrl = self.status[actuator_name]['pos'] + pos
     
+    def set_base_velocity(self,
+                          v_linear:float,
+                          omega:float)->None:
+        """
+        Set the base velocity of the robot"""
+        w_left, w_right = self.diff_drive_inv_kinematics(v_linear, omega)
+        self.mjdata.actuator("left_wheel_vel").ctrl = w_left
+        self.mjdata.actuator("right_wheel_vel").ctrl = w_right
+
+
     def set_velocity(self, 
                      actuator_name:str, 
                      vel:float)->None:
         """
         Set the velocity of the actuator"""
-        # TODO: Implement this method by ether moving to integrated velocity controller or have seperate robot xml replacing position with velocity actuator ctrl
+        # TODO: Implement this method by ether moving to an integrated velocity acuators or have seperate 
+        #       robot xml configured by replacing position with velocity ctrl actuators
         raise NotImplementedError
     
     def pull_status(self)->None:
@@ -91,6 +103,10 @@ class StretchMujocoSimulator:
 
         self.status['gripper']['pos'] = self.mjdata.actuator('gripper').length[0]
         self.status['gripper']['vel'] = self.mjdata.actuator('gripper').velocity[0]
+
+        left_wheel_vel = self.mjdata.actuator('left_wheel_vel').velocity[0]
+        right_wheel_vel = self.mjdata.actuator('right_wheel_vel').velocity[0]
+        self.status['base']['x_vel'], self.status['base']['theta_vel'] = self.diff_drive_fwd_kinematics(left_wheel_vel, right_wheel_vel)
     
     def pull_camera_data(self)->dict:
         """
@@ -110,15 +126,53 @@ class StretchMujocoSimulator:
         data['cam_nav_rgb'] = cv2.cvtColor(self.rgb_renderer.render(), cv2.COLOR_RGB2BGR)
         return data
 
-    def robot_control_callback(self, model: MjModel, data: MjData)->None:
+    def __ctrl_callback(self, model: MjModel, data: MjData)->None:
         """
-        Callback function for controlling the robot in the simulator"""
+        Callback function that gets executed with mj_step"""
         self.mjdata = data
         self.mjmodel = model
         self.pull_status()
 
+    def diff_drive_inv_kinematics(self,
+                                      V:float,
+                                      omega:float)->tuple:
+        """
+        Calculate the rotational velocities of the left and right wheels for a differential drive robot."""
+        R = self.wheel_diameter / 2
+        L = self.wheel_seperation
+        if R <= 0:
+            raise ValueError("Radius must be greater than zero.")
+        if L <= 0:
+            raise ValueError("Distance between wheels must be greater than zero.")
+        
+        # Calculate the rotational velocities of the wheels
+        w_left = (V - (omega * L / 2)) / R
+        w_right = (V + (omega * L / 2)) / R
+        
+        return (w_left, w_right)
+
+    def diff_drive_fwd_kinematics(self,
+                              w_left:float,
+                              w_right:float)->tuple:
+        """
+        Calculate the linear and angular velocity of a differential drive robot."""
+        R = self.wheel_diameter / 2
+        L = self.wheel_seperation
+        if R <= 0:
+            raise ValueError("Radius must be greater than zero.")
+        if L <= 0:
+            raise ValueError("Distance between wheels must be greater than zero.")
+        
+        # Linear velocity (V) is the average of the linear velocities of the two wheels
+        V = R * (w_left + w_right) / 2.0
+        
+        # Angular velocity (omega) is the difference in linear velocities divided by the distance between the wheels
+        omega = R * (w_right - w_left) / L
+        
+        return (V, omega)
+
     def __run(self)->None:
-        mujoco.set_mjcb_control(self.robot_control_callback)
+        mujoco.set_mjcb_control(self.__ctrl_callback)
         mujoco.viewer.launch(self.mjmodel)
 
     def start(self)->None:

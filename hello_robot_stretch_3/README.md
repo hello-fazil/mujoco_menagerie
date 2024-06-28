@@ -1,10 +1,10 @@
-# Hello Robot Stretch 2 Description (MJCF)
+# Hello Robot Stretch 3 Description (MJCF)
 
 Requires MuJoCo 2.3.3 or later.
 
 ## Overview
 
-This package contains a simplified robot description (MJCF) of the [Hello Robot Stretch 2](https://hello-robot.com/product) developed by [Hello Robot](https://hello-robot.com/). The original URDF and assets were provided directly by Hello Robot under the [Clear BSD License](LICENSE).
+This package contains the robot description (MJCF) of the [Hello Robot Stretch 3](https://hello-robot.com/product) developed by [Hello Robot](https://hello-robot.com/). The original URDF and assets were provided directly by Hello Robot under the [Clear BSD License](LICENSE).
 
 <p float="left">
   <img src="stretch.png" width="400">
@@ -20,11 +20,8 @@ This package contains a simplified robot description (MJCF) of the [Hello Robot 
 5. Added actuators.
 6. Added <exclude> clauses to prevent collisions in the telescoping arm.
 7. Added `scene.xml` which includes the robot, with a textured groundplane, skybox, and haze.
+8. Formatted the MJCF wiht XML formatter. 
 
 ## License
 
 This model is released under a [Clear BSD License](LICENSE).
-
-## Acknowledgement
-
-This model would not be possible without the help and patience of [Binit Shah](https://binitshah.github.io/).

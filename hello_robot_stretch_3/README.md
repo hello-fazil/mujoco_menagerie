@@ -20,6 +20,7 @@ This package contains the robot description (MJCF) of the [Hello Robot Stretch 3
 5. Added actuators.
 6. Added <exclude> clauses to prevent collisions in the telescoping arm.
 7. Added `scene.xml` which includes the robot, with a textured groundplane, skybox, and haze.
+8. Formatted the MJCF wiht XML formatter. 
 
 ## License
 

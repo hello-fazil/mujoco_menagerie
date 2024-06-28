@@ -234,6 +234,10 @@
       <geom mesh="base_link_8" material="Pantone_Cool_Gray_4_U" class="visual"/>
       <geom class="collision" mesh="base_link_collision" mass="15.0"/>
       <geom class="caster"/>
+      <body name="base_imu" pos="-0.12838 0.0031592 0.1474" euler="-3.1416 0 1.5708">
+        <site name="base_imu" pos="0 0 0"/>
+      </body>
+        
       <body name="link_mast" pos="-0.067 0.135 0.0284" quat="1 1 0 0">
         <geom material="Generic_Black" mesh="link_mast" class="visual"/>
         <geom mesh="link_mast" class="collision" mass="1.8285"/>
@@ -357,7 +361,7 @@
                           <joint name="joint_wrist_roll" class="wrist_roll"/>
                           <geom material="Generic_Black" mesh="link_SG3_gripper_body" mass="0.29" class="visual"/>
                           <geom mesh="link_SG3_gripper_body" class="collision"/>
-                          <body name="link_SG3_aruco_d405" pos="0 0.0671264013906604 0.0297716109784749" euler="-1.397059993 -0.000305721573415565 -0.001741181" gravcomp="1"> 
+                          <body name="link_SG3_aruco_d405" pos="0 0.0671264013906604 0.0297716109784749" euler="-1.397059993 3.139694278 -0.001741181" gravcomp="1"> 
                             <geom material="Aruco_gripper_cam_Sticker" mesh="link_SG3_aruco_d405" class="visual" mass="3.6E-06"
                             shellinertia="true"/>
                             <geom mesh="link_SG3_aruco_d405" class="collision"/>
@@ -366,7 +370,7 @@
                               <geom material="Gray_Lens" mesh="link_d405_lens" pos="0 0 0" euler="0 0 0" mass="3.6E-06" class="visual"/>
                               <geom material="Pantone_Black_6_U" mesh="link_d405_front_plate" pos="0 0 0" euler="0 0 0" mass="3.6E-06" class="visual"/>
                               <geom mesh="link_d405" class="collision"/>
-                              <body name="d405_cam" pos="0 0 0">
+                              <body name="d405_cam" pos="0 0 0" euler="0 0 3.14">
                                 <camera name="d405_rgb" pos="0 0 0" euler="-3.14 0 -3.14" fovy="58"/>
                                 <camera name="d405_depth" pos="0 0 0" euler="-3.14 0 -3.14"/>
                               </body>
@@ -521,6 +525,10 @@
     <position name="head_tilt" joint="joint_head_tilt" class="head_tilt"/>
   </actuator>
 
+  <sensor>
+    <gyro name="base_gyro" site="base_imu"/>
+    <accelerometer name="base_accel" site="base_imu"/>
+  </sensor>
 
   <keyframe>
     <key name="home" ctrl="0 0 0.6 0.1 0 0 0 0 0 0"/>

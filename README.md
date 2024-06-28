@@ -169,14 +169,16 @@ Menagerie, see [CONTRIBUTING](CONTRIBUTING.md).
 
 | Name | Maker | DoFs    | License | MJX |
 |------|-------|---------|---------|-----|
+| FR3 | Franka Robotics | 7 | [Apache-2.0](franka_fr3/LICENSE) |✖️|
 | iiwa14 | KUKA | 7 | [BSD-3-Clause](kuka_iiwa_14/LICENSE) |✖️|
 | Lite6 | UFACTORY | 6 | [BSD-3-Clause](ufactory_lite6/LICENSE) |✖️|
-| Panda | Franka Emika | 7 | [BSD-3-Clause](franka_emika_panda/LICENSE) |✖️|
+| Panda | Franka Robotics | 7 | [BSD-3-Clause](franka_emika_panda/LICENSE) |✖️|
 | Sawyer | Rethink Robotics | 7 | [Apache-2.0](rethink_robotics_sawyer/LICENSE) |✖️|
 | Unitree Z1 | Unitree Robotics | 6 | [BSD-3-Clause](unitree_z1/LICENSE) |✖️|
 | UR5e | Universal Robots | 6 | [BSD-3-Clause](universal_robots_ur5e/LICENSE) |✖️|
 | UR10e | Universal Robots | 6 | [BSD-3-Clause](universal_robots_ur10e/LICENSE) |✖️|
 | ViperX 300 | Trossen Robotics | 8 | [BSD-3-Clause](trossen_vx300s/LICENSE) |✖️|
+| WidowX 250 | Trossen Robotics | 8 | [BSD-3-Clause](trossen_wx250s/LICENSE) |✖️|
 | xarm7 | UFACTORY | 7 | [BSD-3-Clause](ufactory_xarm7/LICENSE) |✖️|
 
 **Bipeds.**
@@ -227,6 +229,7 @@ Menagerie, see [CONTRIBUTING](CONTRIBUTING.md).
 |------|-------|---------|---------|-----|
 | ANYmal B | ANYbotics | 12 | [BSD-3-Clause](anybotics_anymal_b/LICENSE) |✖️|
 | ANYmal C | ANYbotics | 12 | [BSD-3-Clause](anybotics_anymal_c/LICENSE) |✔️|
+| Spot | Boston Dynamics | 12 | [BSD-3-Clause](boston_dynamics_spot/LICENSE) |✖️|
 | Unitree A1 | Unitree Robotics | 12 | [BSD-3-Clause](unitree_a1/LICENSE) |✖️|
 | Unitree Go1 | Unitree Robotics | 12 | [BSD-3-Clause](unitree_go1/LICENSE) |✖️|
 | Unitree Go2 | Unitree Robotics | 12 | [BSD-3-Clause](unitree_go2/LICENSE) |✔️|
